@@ -4,7 +4,7 @@
   "description": "A standalone package to format time into verbose, lazy time.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watchAll --coverage"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/azefiel/lazy-time/issues"
   },
-  "homepage": "https://github.com/azefiel/lazy-time#readme"
+  "homepage": "https://github.com/azefiel/lazy-time#readme",
+  "devDependencies": {
+    "jest": "^23.6.0"
+  }
 }
