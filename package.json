@@ -1,0 +1,20 @@
+{
+  "name": "lazy-time",
+  "version": "0.1.0",
+  "description": "A standalone package to format time into verbose, lazy time.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/azefiel/lazy-time.git"
+  },
+  "keywords": [],
+  "author": "Joris Tirado",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/azefiel/lazy-time/issues"
+  },
+  "homepage": "https://github.com/azefiel/lazy-time#readme"
+}
