@@ -3,5 +3,5 @@ node_js:
   - "node"
   - "8"
 cache: npm
-scripts:
+script:
   - npm run test:ci
