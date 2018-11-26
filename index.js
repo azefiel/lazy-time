@@ -41,7 +41,16 @@ const getVerboseQuarter = quarter => data.quarters[quarter];
  * lazyTime(new Date(2018, 10, 25, 23, 45))
  * // => quarter till midnight
  */
-module.exports = function (date = new Date()) {
+module.exports = function (date) {
+  if (typeof date === 'undefined') {
+    date = new Date();
+  }
+  if (
+    Object.prototype.toString.call(date) !== '[object Date]'
+    || Number.isNaN(date.getDate())
+  ) {
+    throw new TypeError('"date" is not a date');
+  }
   const hour = date.getHours();
   const minutes = date.getMinutes();
   const quarter = Math.floor(minutes / 15);
