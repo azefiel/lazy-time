@@ -1,4 +1,4 @@
-# lazy-clock [![Build Status](https://travis-ci.org/azefiel/lazy-time.svg?branch=master)](https://travis-ci.org/azefiel/lazy-time) [![Coverage Status](https://coveralls.io/repos/github/azefiel/lazy-time/badge.svg?branch=master)](https://coveralls.io/github/azefiel/lazy-time?branch=master)
+# lazy-clock [![Build Status](https://travis-ci.org/azefiel/lazy-time.svg?branch=master)](https://travis-ci.org/azefiel/lazy-time) [![Coverage Status](https://coveralls.io/repos/github/azefiel/lazy-time/badge.svg?branch=master)](https://coveralls.io/github/azefiel/lazy-time?branch=master) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE.md)
 
 A standalone package to format time into verbose, lazy time.
 
