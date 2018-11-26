@@ -27,3 +27,15 @@ tests.forEach(val => {
 test('no date parameter', () => {
   expect(typeof lazyTime()).toBe('string');
 });
+
+test('"date" is not a date => invalid date', () => {
+  expect(() => {
+    lazyTime(new Date('random string'));
+  }).toThrowError('"date" is not a date');
+});
+
+test('"date" is not a date => not a date', () => {
+  expect(() => {
+    lazyTime('random string');
+  }).toThrowError('"date" is not a date');
+});
