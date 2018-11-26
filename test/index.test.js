@@ -23,3 +23,7 @@ tests.forEach(val => {
     expect(result).toBe(val[2]);
   });
 });
+
+test('no date parameter', () => {
+  expect(typeof lazyTime()).toBe('string');
+});
