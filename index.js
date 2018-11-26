@@ -1,5 +1,26 @@
 const data = require('./data.json');
 
+const getVerboseHour = (hour, quarter) => {
+  const newHour = quarter === 3 ? hour + 1 : hour;
+  const index = newHour % 12;
+  const output = [];
+
+  if ([0,24].includes(newHour)) {
+    output.push(data.hours[0].split('|')[0]);
+  } else if (newHour === 12) {
+    output.push(data.hours[0].split('|')[1]);
+  } else {
+    output.push(data.hours[index]);
+
+    if (quarter === 0) {
+      output.push(getVerboseQuarter(quarter))
+    }
+  }
+
+  return output.join(' ');
+};
+const getVerboseQuarter = quarter => data.quarters[quarter];
+
 /**
  * Formats time into verbose, lazy time.
  *
@@ -14,30 +35,20 @@ const data = require('./data.json');
  * console.log(now);
  * // => Sun Nov 25 2018 16:24:05 GMT-0800 (Pacific Standard Time)
  *
- * lazyTime(now);
+ * lazyTime();
  * // => quarter past four
+ *
+ * lazyTime(new Date(2018, 10, 25, 23, 45))
+ * // => quarter till midnight
  */
 module.exports = function (date = new Date()) {
   const hour = date.getHours();
-  const quarter = Math.floor(date.getMinutes() / 15);
-  const newHour = quarter === 3 ? hour + 1 : hour;
-  const index = newHour % 12;
-  const output = [];
-
-  if ([0,24].includes(newHour)) {
-    output.push(data.hours[0].split('|')[0]);
-  } else if (newHour === 12) {
-    output.push(data.hours[0].split('|')[1]);
-  } else {
-    output.push(data.hours[index]);
-
-    if (quarter === 0) {
-      output.push(data.quarters[0]);
-    }
-  }
+  const minutes = date.getMinutes();
+  const quarter = Math.floor(minutes / 15);
+  const output = [getVerboseHour(hour, quarter)];
 
   if (quarter !== 0) {
-    output.unshift(data.quarters[quarter]);
+    output.unshift(getVerboseQuarter(quarter));
   }
 
   return output.join(' ');
