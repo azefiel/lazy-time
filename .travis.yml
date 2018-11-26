@@ -1,5 +1,7 @@
 language: node_js
-cache: npm
 node_js:
-  - node
+  - "node"
   - "8"
+cache: npm
+scripts:
+  - npm run test:ci
