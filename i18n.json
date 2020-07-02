@@ -1,0 +1,50 @@
+{
+  "en-GB": {
+    "quartersBeforeHours": true,
+    "simpleHours": true,
+    "hours": [
+      "midnight|noon",
+      "one",
+      "two",
+      "three",
+      "four",
+      "five",
+      "six",
+      "seven",
+      "eight",
+      "nine",
+      "ten",
+      "eleven"
+    ],
+    "quarters": [
+      "o'clock",
+      "quarter past",
+      "half past",
+      "quarter till"
+    ]
+  },
+  "fr-FR": {
+    "quarterBeforeHour": false,
+    "simpleHours": false,
+    "hours": [
+      "minuit|midi",
+      "une",
+      "deux",
+      "trois",
+      "quatre",
+      "cinq",
+      "six",
+      "sept",
+      "huit",
+      "neuf",
+      "dix",
+      "onze"
+    ],
+    "quarters": [
+      "heure",
+      "et quart",
+      "et demi",
+      "moins le quart"
+    ]
+  }
+}

@@ -1,30 +1,35 @@
-const data = require('./data.json');
+const languages = require('./i18n.json');
+const defaultLang = 'en-GB';
 
-const getVerboseHour = (hour, quarter) => {
+const getLanguageSet = lang => languages[lang] || languages[defaultLang];
+const getVerboseHour = (hour, quarter, set) => {
   const newHour = quarter === 3 ? hour + 1 : hour;
   const index = newHour % 12;
   const output = [];
 
   if ([0,24].includes(newHour)) {
-    output.push(data.hours[0].split('|')[0]);
+    output.push(set.hours[0].split('|')[0]);
   } else if (newHour === 12) {
-    output.push(data.hours[0].split('|')[1]);
+    output.push(set.hours[0].split('|')[1]);
   } else {
-    output.push(data.hours[index]);
+    output.push(set.hours[index]);
 
-    if (quarter === 0) {
-      output.push(getVerboseQuarter(quarter))
+    if (quarter === 0 || !set.simpleHours) {
+      output.push(getVerboseQuarter(0, set));
     }
   }
 
   return output.join(' ');
 };
-const getVerboseQuarter = quarter => data.quarters[quarter];
+const getInsertMethod = ({quartersBeforeHours}) => quartersBeforeHours ? 'unshift' : 'push';
+const getVerboseQuarter = (quarter, {quarters}) => quarters[quarter];
+
 
 /**
  * Formats time into verbose, lazy time.
  *
  * @param {Date} [date=new Date()] - Date to format into lazy format.
+ * @param {String} [lang='en-GB'] - Country code.
  * @return {string} Representation of time in lazy format.
  *
  * @example
@@ -40,24 +45,24 @@ const getVerboseQuarter = quarter => data.quarters[quarter];
  *
  * lazyTime(new Date(2018, 10, 25, 23, 45))
  * // => quarter till midnight
+ *
+ * lazyTime(new Date(2018, 10, 25, 23, 45), 'fr-FR')
+ * // => minuit moins le quart
  */
-module.exports = function (date) {
-  if (typeof date === 'undefined') {
-    date = new Date();
-  }
+module.exports = (date = new Date(), lang = defaultLang) => {
   if (
     Object.prototype.toString.call(date) !== '[object Date]'
     || Number.isNaN(date.getDate())
   ) {
-    throw new TypeError('"date" is not a date');
+    date = new Date();
   }
+  const set = getLanguageSet(lang);
   const hour = date.getHours();
-  const minutes = date.getMinutes();
-  const quarter = Math.floor(minutes / 15);
-  const output = [getVerboseHour(hour, quarter)];
+  const quarter = Math.floor(date.getMinutes() / 15);
+  const output = [getVerboseHour(hour, quarter, set)];
 
   if (quarter !== 0) {
-    output.unshift(getVerboseQuarter(quarter));
+    output[getInsertMethod(set)](getVerboseQuarter(quarter, set));
   }
 
   return output.join(' ');
